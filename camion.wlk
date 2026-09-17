@@ -1,55 +1,105 @@
 import cosas.*
 
 object camion {
-	const property cosas = #{}
+	var cosas = #{}
 	const tara = 1000
-		
+
+	method tieneCosa(_cosa) {
+		return cosas.any({cosa => cosa == _cosa})
+	}
 	method cargar(_cosa) {
 		self.validarCargar(_cosa)
 		cosas.add(_cosa)
 	}
 	method validarCargar(_cosa) {
-		if (tieneCosa(_cosa)) {
-			self.error("No se puede cargar" +_cosa)
+		if (self.tieneCosa(_cosa)) {
+			self.error("No se puede cargar " + _cosa)
 		}
 	}
-	method tieneCosa(_cosa) {
-		cosas.any({cosa => cosa == _cosa})
-	}
-    method descargar(_cosa) {
+	method descargar(_cosa) {
 		self.validarDescargar(_cosa)
 		cosas.remove(_cosa)
 	}
 	method validarDescargar(_cosa) {
-		if (not tieneCosa(_cosa)) {
-			self.error("No se puede descargar" + _cosa)
+		if (not self.tieneCosa(_cosa)) {
+			self.error("No se puede descargar " + _cosa)
 		}
 	}
-	method elPesoEsPar() {
-		return cosas.all({elemento => elemento.peso() % 2 ==0})
-	}
-	method pesa(_peso) {
-		return cosas.any({elemento => elemento.peso() == _peso})
-	}
-	method pesoTotalDelCamion() {
-		return cosas.sum({elemento => elemento.peso()}) + tara
-	}
-	method estaExcedidoDePeso() {
-		return self.pesoTotalDelCamion() > 2500
-	}
-	method elementoConNivel(_nivel) {
-		self.validarElementoConNivel(_nivel)
-		return cosas.filter({elemento => elemento.nivelDePeligrosidad() == _nivel}).first()
-	}
-	method validarElementoConNivel(_nivel) {
-		if (cosas.filter({elemento => elemento.nivelDePeligrosidad() == _nivel}).isEmpty()) {
-			self.error("No hay elementos con nivel" + _nivel)
-		}
+	method esIgualDePeligrosoQue(_nivel) {
+		cosas.find({cosa => cosa.nivelDePeligrosidad() == _nivel})
 	}
 	method cosasQueSuperan(_nivel) {
-		return cosas.filter({elemento => elemento.nivelDePeligrosidad() > _nivel})
+		return cosas.filter({cosa => cosa.nivelDePeligrosidad() > _nivel})
 	}
 	method cosasMasPeligrosaQue(_cosa) {
 		return self.cosasQueSuperan(_cosa.nivelDePeligrosidad())
+	}
+	method puedeCircularEnRuta(_nivel) {
+		self.validarPuedeCircularEnRuta(_nivel)
+		return not peso.estaExcedidoDePeso(cosas,tara) && (self.cosasQueSuperan(_nivel) == #{})
+	}
+	method validarPuedeCircularEnRuta(_nivel) {
+		if (peso.estaExcedidoDePeso(cosas,tara) || (self.cosasQueSuperan(_nivel) != #{})) {
+        self.error("no puede circular en la ruta")
+        }
+	}
+
+	method pesoTotal() {
+		peso.pesoTotal(cosas,tara) 
+	}
+	method totalDeBultos() {
+		cosas.sum({cosa => cosa.bulto()})
+	}
+	method accidente() {
+		cosas.forEach({cosa => cosa.tieneAccidente()})
+	}
+	method transportar(destino, camino) {
+    self.validarTransportar(destino, camino)
+    destino.agregarElementosDeCamion(cosas)
+    cosas.clear()
+}
+
+    method validarTransportar(destino, camino) {
+		if (not camino.soportaViajeCon(self)) {
+			self.error("no puede transportar cosas hacia " + destino + " en " + camino)
+        }
+    }
+}
+object peso {
+
+	method todosSonPares(_cosas) {
+		return _cosas.all({cosa => cosa.peso() % 2 == 0})
+	}
+	method pesa(_cosas, _peso) {
+		return _cosas.any({cosa => cosa.peso() == _peso})
+	}
+	method pesoTotal(_cosas, tara) {
+		return _cosas.sum({cosa => cosa.peso()}) + tara
+	} 
+	method estaExcedidoDePeso(_cosas,tara) {
+		return self.pesoTotal(_cosas,tara) > 2500
+	}
+	method cosaEstaEntre(_cosas, _peso1, _peso2) {
+		return _cosas.any({cosa => cosa.peso() >= _peso1 && cosa.peso() <= _peso2})
+	}
+	method cosaMasPesada(_cosas) {
+		return _cosas.max({cosa => cosa.peso()})
+	} 
+	method conjuntoDePesos(_cosas) {
+		return _cosas.map({cosa => cosa.peso()})
+	}
+}
+
+object almacen {
+	var elementos = #{}
+
+	method agregarElementos(_elemento) {
+		add.elementos(_elemento)
+	}
+	method elementos() {
+		return elementos
+	}
+    method agregarElementosDeCamion(_cosas) {
+		_cosas.foreach({cosa => elementos.add(cosa)})
 	}
 }
