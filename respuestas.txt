@@ -1,0 +1,72 @@
+* Describir los polimorfismos asociados a las colecciones: 
+
+   - ¿Qué nombre tiene el tipo de los objetos polimórficos?
+      -Nombre del tipo de los objetos polimorficos: Cosas, Camino y Destino.
+
+   - ¿Qué mensajes componen ese tipo?
+     Componen ese tipo los mensajes:
+       -Cosas: 
+             -peso()
+             -nivelDePeligrosidad()
+             -bulto()
+             -tieneAccidente()
+        -Camino: 
+             -soportaViajeConVehiculo(vehiculo)
+        
+        -Destino:
+             -transportar(destino,camino)
+
+   - ¿Qué objetos son los emisores de los mensajes polimórficos?
+
+      Los objetos que son emisores de los mensajes polimórficos son:
+         -peso() :
+                 -knightRider
+                 -arenaAGranel
+                 -bumblebee
+                 -paqueteDeLadrillos
+                 -bateriaAntiaerea
+                 -residuosRadioactivos
+                 -contenedorPortuario
+                 -embalajeDeSeguridad
+        
+        -nivelDePeligrosidad() :
+                 -knightRider
+                 -arenaAGranel
+                 -bumblebee
+                 -paqueteDeLadrillos
+                 -bateriaAntiaerea
+                 -residuosRadioactivos
+                 -contenedorPortuario
+                 -embalajeDeSeguridad
+                 -ruta9
+
+        -bulto() :
+                 -knightRider
+                 -arenaAGranel
+                 -bumblebee
+                 -paqueteDeLadrillos
+                 -bateriaAntiaerea
+                 -residuosRadioactivos
+                 -contenedorPortuario
+                 -embalajeDeSeguridad
+
+        -tieneAccidente() :
+                 -knightRider
+                 -arenaAGranel
+                 -bumblebee
+                 -paqueteDeLadrillos
+                 -bateriaAntiaerea
+                 -residuosRadioactivos
+                 -contenedorPortuario
+                 -embalajeDeSeguridad
+        
+        -soportaViajeCon(vehiculo) :
+                -ruta9
+                -caminosVecinales
+
+        -transportar(destino,camino) :
+                -camion
+        
+   
+   
+
