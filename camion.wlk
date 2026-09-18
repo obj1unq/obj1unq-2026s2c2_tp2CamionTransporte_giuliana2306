@@ -1,11 +1,17 @@
 import cosas.*
 
 object camion {
-	var cosas = #{}
+	var cosas  = #{}
 	const tara = 1000
 
 	method tieneCosa(_cosa) {
 		return cosas.any({cosa => cosa == _cosa})
+	}
+	method tara() {
+		return tara
+	}
+	method cosas() {
+		return cosas
 	}
 	method cargar(_cosa) {
 		self.validarCargar(_cosa)
@@ -25,8 +31,14 @@ object camion {
 			self.error("No se puede descargar " + _cosa)
 		}
 	}
-	method esIgualDePeligrosoQue(_nivel) {
-		cosas.find({cosa => cosa.nivelDePeligrosidad() == _nivel})
+	method cosaQueEsIgualDePeligrosoQue(_nivel) {
+		self.validarCosaQueEsIgualDePeligrosoQue(_nivel)
+		return cosas.find({cosa => cosa.nivelDePeligrosidad() == _nivel})
+	}
+	method validarCosaQueEsIgualDePeligrosoQue(_nivel) {
+		if (cosas.find({cosa => cosa.nivelDePeligrosidad() == _nivel}) == null) {
+			self.error("No hay cosa con el nivel" + _nivel)
+		}
 	}
 	method cosasQueSuperan(_nivel) {
 		return cosas.filter({cosa => cosa.nivelDePeligrosidad() > _nivel})
@@ -45,18 +57,18 @@ object camion {
 	}
 
 	method pesoTotal() {
-		peso.pesoTotal(cosas,tara) 
+		return peso.pesoTotal(cosas,tara) 
 	}
 	method totalDeBultos() {
-		cosas.sum({cosa => cosa.bulto()})
+		return cosas.sum({cosa => cosa.bulto()})
 	}
 	method accidente() {
-		cosas.forEach({cosa => cosa.tieneAccidente()})
+		return cosas.forEach({cosa => cosa.tieneAccidente()})
 	}
 	method transportar(destino, camino) {
-    self.validarTransportar(destino, camino)
-    destino.agregarElementosDeCamion(cosas)
-    cosas.clear()
+		self.validarTransportar(destino, camino)
+		destino.agregarElementosDeCamion(cosas)
+		cosas.clear()
 }
 
     method validarTransportar(destino, camino) {
@@ -83,8 +95,14 @@ object peso {
 		return _cosas.any({cosa => cosa.peso() >= _peso1 && cosa.peso() <= _peso2})
 	}
 	method cosaMasPesada(_cosas) {
+		self.validarCosaMasPesada(_cosas)
 		return _cosas.max({cosa => cosa.peso()})
 	} 
+	method validarCosaMasPesada(_cosas) {
+		if (_cosas.max({cosa => cosa.peso()}) == null) {
+			self.error("No hay cosa más pesada")
+		}
+	}
 	method conjuntoDePesos(_cosas) {
 		return _cosas.map({cosa => cosa.peso()})
 	}

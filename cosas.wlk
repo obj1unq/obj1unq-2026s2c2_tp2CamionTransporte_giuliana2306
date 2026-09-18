@@ -5,7 +5,7 @@ object knightRider {
 		return 500
 	}
 	method nivelDePeligrosidad() {
-		return 1
+		return 10
 	}
 	method bulto () {
 		return 1
@@ -51,10 +51,13 @@ object bumblebee {
 	}
 	method tieneAccidente () {
 		if (transformacion == auto) {
-			robot
+			transformacion = robot
 		} else {
-			auto
+			transformacion = auto
 		}
+	}
+	method transformacion() {
+		return transformacion
 	}
 }
 
@@ -98,6 +101,12 @@ object paqueteDeLadrillos {
 			ladrillos = ladrillos - 12
 		}
 	}
+	method nivelDePeligrosidad() {
+		return 2
+	}
+	method cantDeLadrillos() {
+		return ladrillos
+	}
 }
 
 object bateriaAntiaerea {
@@ -126,6 +135,9 @@ object bateriaAntiaerea {
 	method tieneAccidente () {
 		tieneMisiles = false
 	}
+	method estaCargada() {
+		return tieneMisiles
+	}
 }
 
 object residuosRadioactivos {
@@ -152,7 +164,7 @@ object contenedorPortuario {
 	var contenido = []
 
 	method agregarContenido(_contenido) {
-		add.contenido(_contenido)
+		contenido.add(_contenido)
 	}
 	method contenido() {
 		return contenido 
