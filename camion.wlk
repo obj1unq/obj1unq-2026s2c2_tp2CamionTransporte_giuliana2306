@@ -112,12 +112,12 @@ object almacen {
 	var elementos = #{}
 
 	method agregarElementos(_elemento) {
-		add.elementos(_elemento)
+		elementos.add(_elemento)
 	}
 	method elementos() {
 		return elementos
 	}
     method agregarElementosDeCamion(_cosas) {
-		_cosas.foreach({cosa => elementos.add(cosa)})
+		_cosas.forEach({cosa => elementos.add(cosa)})
 	}
 }

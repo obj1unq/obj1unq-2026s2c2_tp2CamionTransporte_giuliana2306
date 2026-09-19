@@ -224,6 +224,6 @@ object caminosVecinales {
         pesoMaximo = _peso
     }
     method soportaViajeCon(vehiculo) {
-        return vehiculo.peso() <= pesoMaximo
+        return vehiculo.pesoTotal() <= pesoMaximo
     }
 }

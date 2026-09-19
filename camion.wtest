@@ -173,7 +173,7 @@ describe "El camion" {
 
         assert.equals(4, camion.totalDeBultos())
     }
-    test "consecuencias de accidentes" {
+    test "consecuencias de accidente 1" {
         camion.cargar(contenedorPortuario)
         camion.cargar(embalajeDeSeguridad)
         camion.cargar(arenaAGranel)
@@ -196,14 +196,20 @@ describe "El camion" {
         assert.equals(88, paqueteDeLadrillos.cantDeLadrillos())
         assert.that(not bateriaAntiaerea.estaCargada())
     } 
-    test ""
+    test "consecuencias de accidente 2" {
+        camion.cargar(bumblebee)
+        camion.cargar(residuosRadioactivos)
+        camion.cargar(paqueteDeLadrillos)
+        camion.cargar(bateriaAntiaerea)
+        camion.accidente()
+
+        bumblebee.cambiarTransformacion(robot)
+        residuosRadioactivos.cambiarPeso(30)
+        paqueteDeLadrillos.ladrillos(10)
+
+        assert.equals(auto, bumblebee.transformacion())
+        assert.equals(45, residuosRadioactivos.peso())
+        assert.equals(0, paqueteDeLadrillos.cantDeLadrillos())
+        assert.that(not bateriaAntiaerea.estaCargada())
+    }
 }
-
-/*
-Bumblebee queda en modo robot.
-Residuos radiactivos quedan con 30 kg de peso.
-La arena queda con 70 kg.
-El paquete de ladrillos queda con 88 ladrillos.
-La batería antiaérea queda descargada.
-
-*/
