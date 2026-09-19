@@ -46,9 +46,3 @@ describe "test del ejercicio 3" {
     }
 }
 
-/*
-Configurar los caminos vecinales con un máximo de 300 kg de soporte.
-El camión no puede transportar por los caminos vecinales hacia el almacén.
-En el almacén quedan Knight Rider y residuos radiactivos.
-En el camión quedan Bumblebee y arena a granel.
-*/
