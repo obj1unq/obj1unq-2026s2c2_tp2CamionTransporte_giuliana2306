@@ -12,6 +12,9 @@ object knightRider {
 	}
 	method tieneAccidente () {
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object arenaAGranel {
@@ -32,6 +35,9 @@ object arenaAGranel {
 	method tieneAccidente () {
 		peso = peso + 20
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object bumblebee {
@@ -59,6 +65,9 @@ object bumblebee {
 	method transformacion() {
 		return transformacion
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object robot {
@@ -107,6 +116,9 @@ object paqueteDeLadrillos {
 	method cantDeLadrillos() {
 		return ladrillos
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object bateriaAntiaerea {
@@ -138,6 +150,9 @@ object bateriaAntiaerea {
 	method estaCargada() {
 		return tieneMisiles
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object residuosRadioactivos {
@@ -158,6 +173,9 @@ object residuosRadioactivos {
 	method tieneAccidente() {
 		peso = peso + 15
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object contenedorPortuario {
@@ -185,6 +203,9 @@ object contenedorPortuario {
 	method tieneAccidente() {
 		contenido.forEach({cosa => cosa.tieneAccidente()})
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object embalajeDeSeguridad {
@@ -204,6 +225,9 @@ object embalajeDeSeguridad {
 	}
 	method tieneAccidente() {
 	}
+	method esPesoPar() {
+		return self.peso() % 2 == 0
+    }
 }
 
 object ruta9 {
