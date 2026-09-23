@@ -3,13 +3,7 @@ object camion {
     const tara = 1000
 
     method puedeCircularEnRuta(_nivel) {
-		self.validarPuedeCircularEnRuta(_nivel)
 		return not self.estaExcedidoDePeso() && (carga.cosasQueSuperan(_nivel) == #{})
-	}
-	method validarPuedeCircularEnRuta(_nivel) {
-		if (self.estaExcedidoDePeso() || (carga.cosasQueSuperan(_nivel) != #{})) {
-        self.error("no puede circular en la ruta")
-        }
 	}
 	method estaExcedidoDePeso() {
 		return self.pesoTotal() > 2500

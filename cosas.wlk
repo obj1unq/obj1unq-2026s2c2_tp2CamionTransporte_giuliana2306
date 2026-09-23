@@ -36,7 +36,7 @@ object arenaAGranel {
 		peso = peso + 20
 	}
 	method esPesoPar() {
-		return self.peso() % 2 == 0
+		return peso % 2 == 0
     }
 }
 
@@ -151,7 +151,7 @@ object bateriaAntiaerea {
 		return tieneMisiles
 	}
 	method esPesoPar() {
-		return self.peso() % 2 == 0
+		return peso() % 2 == 0
     }
 }
 
@@ -174,7 +174,7 @@ object residuosRadioactivos {
 		peso = peso + 15
 	}
 	method esPesoPar() {
-		return self.peso() % 2 == 0
+		return peso % 2 == 0
     }
 }
 
